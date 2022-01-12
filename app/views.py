@@ -61,7 +61,7 @@ def registerUser(request):
    
     return render(request, 'registration.html', context)
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def home(request):
     images = Image.objects.all()  
 
@@ -71,7 +71,7 @@ def home(request):
 
     return render(request, 'home.html', context)
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def new_image(request):
     current_user = request.user
     image = Image.objects.filter(user=request.user).last()
@@ -110,7 +110,7 @@ def image(request, id):
     }
     return render(request, 'image.html', context)
 
-# @login_required(login_url='login')
+@login_required(login_url='login')
 def search_results(request):
     if 'profile' in request.GET and request.GET['profile']:
         search_query = request.GET.get('profile')
@@ -127,6 +127,7 @@ def search_results(request):
         return render(request, 'search.html', {'message':message})
 
 
+@login_required(login_url='login')
 def like_image(request, id):
     likes = Likes.objects.filter(image_id=id).first()
     if Likes.objects.filter(image_id=id, user_id=request.user.id).exists():
@@ -147,6 +148,7 @@ def like_image(request, id):
         image.save()
         return redirect('home')
 
+@login_required(login_url='login')
 def view_profile(request, id):
     try:
         profile = Profile.objects.get(id = id)
@@ -159,6 +161,7 @@ def view_profile(request, id):
         return redirect('home')
   
 
+@login_required(login_url='login')
 def update_profile(request):
     if request.method == 'POST':
         form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
