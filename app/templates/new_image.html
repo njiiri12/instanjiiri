@@ -1,0 +1,22 @@
+
+
+{% extends 'base.html' %} 
+
+{% load bootstrap3 %}
+{% block content %}
+
+<div class="container">
+    <h4>post image</h4>
+    <div class="form-wrapper">
+        <form  action="{% url 'new_image' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                
+            {% bootstrap_form form%}
+            <input type="submit" class="btn post-btn" value="Post">
+        </form>
+    </div>
+</div>   
+
+{% endblock %}
+
+

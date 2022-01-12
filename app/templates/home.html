@@ -1,0 +1,96 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+{{ block.super }}
+
+<div class="container intro">
+    <div class="row">
+        <div class="left col-md-2">
+            
+        </div>
+        <div class="content col-md-5">
+                       
+            {% for image in images %} 
+            <a href="{% url 'image' image.id %}">
+                <div class="post">
+                    <div class="upper-bar">
+                            <div class="profile">
+                                <img src="{{ image.user.profile.profile_photo.url }}" alt="">
+                            </div>                        
+                        <h5>{{ image.user.profile.username }}</h5>
+                    </div>
+                    <div class="image-container">
+                        <img src="{{ image.image_content.url }}" alt="photo">
+                    </div> 
+                    <div class="icons-container">
+                       <div class="container">
+                           <div class="row">
+                            <div class="left-icon-container col-md-6">
+                                <a href="{% url 'like_image' image.id %}"><img src="https://res.cloudinary.com/dblrvhi8r/image/upload/v1638684050/icons8-heart-64_mjxryt.png" alt="like button"></a>
+                                <a href=""><img src="https://res.cloudinary.com/dblrvhi8r/image/upload/v1638689281/comment_1_dziida.png" alt="comment button"></a>
+                                <a href=""><img src="https://res.cloudinary.com/dblrvhi8r/image/upload/v1638689553/paper-plane_yoshac.png" alt="paper plane"></a>
+                               </div>
+                               <div class="right-icon-container col-md-6">
+                                <a href=""><img src="https://res.cloudinary.com/dblrvhi8r/image/upload/v1638689554/bookmark_hfcjj2.png" alt="bookmark icon"></a>
+                               </div>
+                           </div>
+                       </div>
+                    </div>  
+                    <div class="post-details">
+                       <div class="container">
+                           <div class="row">
+                            <p>Liked by {{ image.total_likes }} people</p>
+                            <p><span>{{ image.user.username }}</span> --{{ image.image_name }}</p>
+                           </div>
+                       </div>
+                    </div>
+                    <div class="comment-section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="smiley col-md-1">
+                                    <img src="https://res.cloudinary.com/dblrvhi8r/image/upload/v1638691186/smiley_pliq6m.png" alt="smiley icon">
+                                </div>
+                                <div class="input-tray col-md-3 cooment-form">
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        <input type="text" name="comment_content" placeholder="Add a comment...">
+                                    </form>
+                                </div>
+                                <div class="send-comment col-md-1">
+                                    <a href="">Post</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>     
+                    
+                </div>
+            </a>
+            <hr>
+            {% endfor %} 
+        </div>
+        <div class="recommendations col-md-3 sticky-top">
+
+            <div class="sidebar-item">
+                <div class="sticky-column">
+                    <div class="top-bar">
+                        {% if request.user.is_authenticated %}
+                        <div class="profile bigger">
+                            <a href="{% url 'view_profile' user.profile.id %}"><img src="{{ user.profile.profile_photo.url }}" alt=""></a>
+                        </div>
+                        <div>
+                            <h4>{{ user.username }}</h4>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <h5>suggestions for you</h5>
+                </div>
+            </div>
+        </div>
+        <div class="empty col-md-2">
+        
+        </div>
+
+    </div>
+   
+</div>
+{% endblock %}

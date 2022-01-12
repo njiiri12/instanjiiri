@@ -1,0 +1,22 @@
+{% extends 'base.html' %}  
+
+
+{% block content %}
+<div class="container view-profile">
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <img src="{{ profile.profile_photo.url }}" alt="profile photo">
+            </div>
+            <h4>{{ profile.username }}</h4>
+            <p>{{ profile.bio }}</p>
+            <a href="{% url 'update_profile' %}">update profile</a>
+        </div>
+        <div class="col-md-8">
+            
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}

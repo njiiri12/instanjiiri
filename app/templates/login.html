@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<div class="container">
+    <div class="login-form">
+        <h2>instagram</h2>
+        <div>
+            <form action="" method='POST'>
+                {% csrf_token %}
+                <input type="text" name='username' placeholder="username">
+    
+                <input type="password" name='password' placeholder="Enter password"> 
+    
+    
+                <button type="submit" value="login">login</button>
+    
+            </form>
+        </div>      
+    </div>
+
+    <div>
+        <p>haven't signed up yet?</p>
+        <a href="{% url 'register' %}">sign up</a>
+    </div>   
+</div>
+
+
+{% endblock %}

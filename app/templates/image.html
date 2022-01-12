@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+   <div class="container">  
+
+        <div class="comments">
+            <div class="row">
+                <div class="col-md-7">
+                    <img src="{{ image.image_content.url }}" alt="image">
+                </div>
+                <div class="col-md-5">
+                    <h2>{{ image.image_name}}</h2>
+                    <h3>{{ image.image_caption }}</h3>
+                    <p>{{ image.user.username }}</p>
+                    <small>{{ image.date_created|timesince }} ago</small>
+
+
+                    {% for comment in comments %}                      
+                        <div class="comment-container">
+                            <small>{{ comment.user.username }}</small>
+                            <h4>{{ comment.comment_content }}</h4> 
+                            <small>{{ comment.date_created|timesince }}</small>
+                        </div>       
+                    {% endfor %}
+
+                   <div class="comment-post">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="comment_content" placeholder="Add a comment...">
+                    </form>
+                   </div>
+
+                </div>       
+            </div>    
+        </div>
+   </div>
+{% endblock %}
+

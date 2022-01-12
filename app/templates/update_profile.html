@@ -1,0 +1,12 @@
+{% extends 'base.html' %}  
+
+{% load bootstrap3 %}  
+
+{% block content %} 
+
+    <form action="{% url 'update_profile' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %} {% bootstrap_form form %}
+        <button class=" btn btn-outline-secondary " type="submit ">Submit</button>
+    </form>
+
+{% endblock %}
